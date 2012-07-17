@@ -1,13 +1,13 @@
 # encoding: utf-8
-module Weibo2
+module Tqq2
   module Interface
-  
+
     # Search API
     #
     # @see http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2#.E6.90.9C.E7.B4.A2
     class Search < Base
-      
-      # 搜索用户时的联想搜索建议 
+
+      # 搜索用户时的联想搜索建议
       #
       # @param [String] q 搜索的关键字
       # @param [Hash] opts
@@ -17,7 +17,7 @@ module Weibo2
       def suggestions_users(q, opts={})
         get 'search/suggestions/users.json', :params => {:q => q}.merge(opts)
       end
-      
+
       # 搜索微博时的联想搜索建议
       #
       # @param [String] q 搜索的关键字
@@ -28,7 +28,7 @@ module Weibo2
       def suggestions_statuses(q, opts={})
         get 'search/suggestions/statuses.json', :params => {:q => q}.merge(opts)
       end
-      
+
       # 搜索学校时的联想搜索建议
       #
       # @param [String] q 搜索的关键字
@@ -40,7 +40,7 @@ module Weibo2
       def suggestions_schools(q, opts={})
         get 'search/suggestions/schools.json', :params => {:q => q}.merge(opts)
       end
-      
+
       # 搜索公司时的联想搜索建议
       #
       # @param [String] q 搜索的关键字
@@ -51,7 +51,7 @@ module Weibo2
       def suggestions_companies(q, opts={})
         get 'search/suggestions/companies.json', :params => {:q => q}.merge(opts)
       end
-      
+
       # 搜索应用时的联想搜索建议
       #
       # @param [String] q 搜索的关键字
@@ -62,7 +62,7 @@ module Weibo2
       def suggestions_apps(q, opts={})
         get 'search/suggestions/apps.json', :params => {:q => q}.merge(opts)
       end
-      
+
       # @用户时的联想建议
       #
       # @param [String] q 搜索的关键字
@@ -75,7 +75,7 @@ module Weibo2
       def suggestions_at_users(q, type, opts={})
         get 'search/suggestions/at_users.json', :params => {:q => q, :type => type}.merge(opts)
       end
-      
+
       #TODO:test no pass
       # 综合联想，包含用户、微群、应用等的联想建议
       #
@@ -92,7 +92,7 @@ module Weibo2
       def suggestions_integrate(q, opts={})
         get 'search/suggestions/integrate.json', :params => {:query => q}.merge(opts)
       end
-      
+
       # 搜索与指定的一个或多个条件相匹配的微博 [Privilege]
       #
       # @param [Hash] opts
@@ -113,7 +113,7 @@ module Weibo2
       def statuses(opts={})
         get 'search/statuses.json', :params => opts
       end
-      
+
       # 获取指定地点周边的微博列表 [Privilege]
       #
       # @param [float] longitude 经度。有效范围：-180.0到+180.0，+表示东经
@@ -130,7 +130,7 @@ module Weibo2
       def geo_statuses(longitude, latitude, opts={})
         get 'search/geo/statuses.json', :params => {:longitude => longitude, :latitude => latitude}.merge(opts)
       end
-      
+
       # 通过关键词搜索用户 [Privilege]
       #
       # @param [Hash] opts
@@ -152,7 +152,7 @@ module Weibo2
       def users(opts={})
         get 'search/users.json', :params => opts
       end
-      
+
     end
   end
 end

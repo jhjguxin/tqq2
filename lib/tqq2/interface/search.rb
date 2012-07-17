@@ -15,7 +15,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/search/suggestions/users
       def suggestions_users(q, opts={})
-        get 'search/suggestions/users.json', :params => {:q => q}.merge(opts)
+        get 'search/suggestions/users.json', :params => {:q => q}.merge(opts).merge(@client.request_params)
       end
 
       # 搜索微博时的联想搜索建议
@@ -26,7 +26,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/search/suggestions/statuses
       def suggestions_statuses(q, opts={})
-        get 'search/suggestions/statuses.json', :params => {:q => q}.merge(opts)
+        get 'search/suggestions/statuses.json', :params => {:q => q}.merge(opts).merge(@client.request_params)
       end
 
       # 搜索学校时的联想搜索建议
@@ -49,7 +49,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/search/suggestions/companies
       def suggestions_companies(q, opts={})
-        get 'search/suggestions/companies.json', :params => {:q => q}.merge(opts)
+        get 'search/suggestions/companies.json', :params => {:q => q}.merge(opts).merge(@client.request_params)
       end
 
       # 搜索应用时的联想搜索建议
@@ -60,7 +60,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/search/suggestions/apps
       def suggestions_apps(q, opts={})
-        get 'search/suggestions/apps.json', :params => {:q => q}.merge(opts)
+        get 'search/suggestions/apps.json', :params => {:q => q}.merge(opts).merge(@client.request_params)
       end
 
       # @用户时的联想建议
@@ -73,7 +73,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/search/suggestions/at_users
       def suggestions_at_users(q, type, opts={})
-        get 'search/suggestions/at_users.json', :params => {:q => q, :type => type}.merge(opts)
+        get 'search/suggestions/at_users.json', :params => {:q => q, :type => type}.merge(opts).merge(@client.request_params)
       end
 
       #TODO:test no pass
@@ -111,7 +111,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/search/statuses
       def statuses(opts={})
-        get 'search/statuses.json', :params => opts
+        get 'search/statuses.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取指定地点周边的微博列表 [Privilege]
@@ -128,7 +128,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/search/geo/statuses
       def geo_statuses(longitude, latitude, opts={})
-        get 'search/geo/statuses.json', :params => {:longitude => longitude, :latitude => latitude}.merge(opts)
+        get 'search/geo/statuses.json', :params => {:longitude => longitude, :latitude => latitude}.merge(opts).merge(@client.request_params)
       end
 
       # 通过关键词搜索用户 [Privilege]
@@ -150,7 +150,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/search/users
       def users(opts={})
-        get 'search/users.json', :params => opts
+        get 'search/users.json', :params => opts.merge(@client.request_params)
       end
 
     end

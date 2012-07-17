@@ -16,7 +16,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/public_timeline
       def public_timeline(opts={})
-        get 'statuses/public_timeline.json', :params => opts
+        get 'statuses/public_timeline.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取当前登录用户及其所关注用户的最新微博
@@ -31,7 +31,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/friends_timeline
       def friends_timeline(opts={})
-        get 'statuses/friends_timeline.json', :params => opts
+        get 'statuses/friends_timeline.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取当前登录用户及其所关注用户的最新微博
@@ -46,7 +46,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/home_timeline
       def home_timeline(opts={})
-        get 'statuses/home_timeline.json', :params => opts
+        get 'statuses/home_timeline.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取某个用户最新发表的微博列表
@@ -64,7 +64,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/user_timeline
       def user_timeline(opts={})
-        get 'statuses/user_timeline.json', :params => opts
+        get 'statuses/user_timeline.json', :params => opts.merge(@client.request_params)
       end
 
       # 批量获取指定的一批用户的微博列表 [Privilege]
@@ -77,7 +77,7 @@ module Tqq2
       # @option opts [int] :feature  过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0
       # @see http://open.weibo.com/wiki/2/statuses/timeline_batch
       def timeline_batch(opts={})
-        get 'statuses/timeline_batch.json', :params => opts
+        get 'statuses/timeline_batch.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取指定微博的转发微博列表
@@ -92,7 +92,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/repost_timeline
       def repost_timeline(id, opts={})
-        get 'statuses/repost_timeline.json', :params => {:id => id}.merge(opts)
+        get 'statuses/repost_timeline.json', :params => {:id => id}.merge(opts).merge(@client.request_params)
       end
 
       # 获取当前用户最新转发的微博列表
@@ -105,7 +105,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/repost_by_me
       def repost_by_me(opts={})
-        get 'statuses/repost_by_me.json', :params => opts
+        get 'statuses/repost_by_me.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取最新的提到登录用户的微博列表，即@我的微博
@@ -121,7 +121,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/mentions
       def mentions(opts={})
-        get 'statuses/mentions.json', :params => opts
+        get 'statuses/mentions.json', :params => opts.merge(@client.request_params)
       end
 
       # 根据微博ID获取单条微博内容
@@ -130,7 +130,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/show
       def show(id)
-        get 'statuses/show.json', :params => {:id => id}
+        get 'statuses/show.json', :params => {:id => id}.merge(@client.request_params)
       end
 
       # 根据微博ID批量获取微博信息 [Privilege]
@@ -151,7 +151,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/querymid
       def querymid(id, type=1, opts={})
-        get 'statuses/querymid.json', :params => {:id => id, :type => type}.merge(opts)
+        get 'statuses/querymid.json', :params => {:id => id, :type => type}.merge(opts).merge(@client.request_params)
       end
 
       # test failed
@@ -166,7 +166,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/queryid
       def queryid(mid, type=1, opts={})
-        get 'statuses/queryid.json', :params => {:mid => mid, :type => type}.merge(opts)
+        get 'statuses/queryid.json', :params => {:mid => mid, :type => type}.merge(opts).merge(@client.request_params)
       end
 
       # 按天返回热门微博转发榜的微博列表
@@ -177,7 +177,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/hot/repost_daily
       def hot_repost_daily(opts={})
-        get 'statuses/hot/repost_daily.json', :params => opts
+        get 'statuses/hot/repost_daily.json', :params => opts.merge(@client.request_params)
       end
 
       # 按周返回热门微博转发榜的微博列表
@@ -188,7 +188,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/hot/repost_weekly
       def hot_repost_weekly(opts={})
-        get 'statuses/hot/repost_weekly.json', :params => opts
+        get 'statuses/hot/repost_weekly.json', :params => opts.merge(@client.request_params)
       end
 
       # 按天返回热门微博评论榜的微博列表
@@ -199,7 +199,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/hot/comments_daily
       def hot_comments_daily(opts={})
-        get 'statuses/hot/comments_daily.json', :params => opts
+        get 'statuses/hot/comments_daily.json', :params => opts.merge(@client.request_params)
       end
 
       # 按周返回热门微博评论榜的微博列表
@@ -210,7 +210,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/hot/comments_weekly
       def hot_comments_weekly(opts={})
-        get 'statuses/hot/comments_weekly.json', :params => opts
+        get 'statuses/hot/comments_weekly.json', :params => opts.merge(@client.request_params)
       end
 
 
@@ -227,7 +227,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/repost
       def repost(id, opts={})
-        post 'statuses/repost.json', :body => {:id => id}.merge(opts)
+        post 'statuses/repost.json', :body => {:id => id}.merge(opts).merge(@client.request_params)
       end
 
       # 根据微博ID删除指定微博
@@ -236,7 +236,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/destroy
       def destroy(id)
-        post 'statuses/destroy.json', :body => {:id => id}
+        post 'statuses/destroy.json', :body => {:id => id}.merge(@client.request_params)
       end
 
       # no tested
@@ -251,7 +251,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/update
       def update(status, opts={})
-        post 'statuses/update.json', :body => {:status => status}.merge(opts)
+        post 'statuses/update.json', :body => {:status => status}.merge(opts), :params => @client.request_params
       end
 
       # no tested
@@ -267,7 +267,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/upload
       def upload(status, pic, opts={})
-        post 'statuses/upload.json', :body => {:status => status, :pic => pic}.merge(opts)
+        post 'statuses/upload.json', :body => {:status => status, :pic => pic}.merge(opts), :params => @client.request_params
       end
 
       # 指定一个图片URL地址抓取后上传并同时发布一条新微博 [Privilege]
@@ -282,7 +282,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/statuses/upload_url_text
       def upload_url_text(opts={})
-        post 'statuses/upload_url_text.json', :body => opts
+        post 'statuses/upload_url_text.json', :body => opts, :params => @client.request_params
       end
 
       # 获取微博官方表情的详细信息
@@ -293,7 +293,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/emotions
       def emotions(opts={})
-        get 'emotions.json', :params => opts
+        get 'emotions.json', :params => opts, :params => @client.request_params
       end
     end
   end

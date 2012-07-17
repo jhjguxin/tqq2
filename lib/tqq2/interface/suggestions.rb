@@ -14,7 +14,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/suggestions/users/hot
       def users_hot(opts={})
-        get 'suggestions/users/hot.json', :params => opts
+        get 'suggestions/users/hot.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取用户可能感兴趣的人
@@ -25,7 +25,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/suggestions/users/may_interested
       def users_may_interested(opts={})
-        get 'suggestions/users/may_interested.json', :params => opts
+        get 'suggestions/users/may_interested.json', :params => opts.merge(@client.request_params)
       end
 
       # 根据一段微博正文推荐相关微博用户
@@ -36,7 +36,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/suggestions/users/by_status
       def users_by_status(content, opts={})
-        get 'suggestions/users/by_status.json', :params => {:content => content}.merge(opts)
+        get 'suggestions/users/by_status.json', :params => {:content => content}.merge(opts).merge(@client.request_params)
       end
 
       # 返回系统推荐的热门收藏
@@ -47,7 +47,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/suggestions/favorites/hot
       def favorites_hot(opts={})
-        get 'suggestions/favorites/hot.json', :params => opts
+        get 'suggestions/favorites/hot.json', :params => opts.merge(@client.request_params)
       end
 
 
@@ -61,7 +61,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/suggestions/users/not_interested
       def users_not_interested(uid)
-        post 'suggestions/users/not_interested.json', :body => {:uid => uid}
+        post 'suggestions/users/not_interested.json', :body => {:uid => uid}, :params => @client.request_params
       end
 
     end

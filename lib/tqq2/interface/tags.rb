@@ -15,7 +15,7 @@ module Tqq2
       # @option opts [int] :page  返回结果的页码，默认为1
       # @see http://open.weibo.com/wiki/2/tags
       def tags(uid, opts={})
-        get 'tags.json', :params => {:uid => uid}.merge(opts)
+        get 'tags.json', :params => {:uid => uid}.merge(opts).merge(@client.request_params)
       end
 
       # 批量获取用户的标签列表
@@ -24,7 +24,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/tags/tags_batch
       def tags_batch(uids)
-        get 'tags/tags_batch.json', :params => {:uids => uids}
+        get 'tags/tags_batch.json', :params => {:uids => uids}.merge(@client.request_params)
       end
 
       # 获取系统推荐的标签列表
@@ -34,7 +34,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/tags/suggestions
       def suggestions(opts={})
-        get 'tags/suggestions.json', :params => opts
+        get 'tags/suggestions.json', :params => opts.merge(@client.request_params)
       end
 
       #
@@ -47,7 +47,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/tags/create
       def create(tags)
-        post 'tags/create.json', :body => {:tags => tags}
+        post 'tags/create.json', :body => {:tags => tags}, :params => @client.request_params
       end
 
       # 删除一个用户标签
@@ -56,7 +56,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/tags/destroy
       def destroy(tag_id)
-        post 'tags/destroy.json', :body => {:tag_id => tag_id}
+        post 'tags/destroy.json', :body => {:tag_id => tag_id}, :params => @client.request_params
       end
 
       # 批量删除一组标签
@@ -64,7 +64,7 @@ module Tqq2
       # @param [String] ids 要删除的一组标签ID，以半角逗号隔开，一次最多提交10个ID
       #
       def destroy_batch(ids)
-        post 'tags/destroy_batch.json', :body => {:ids => ids}
+        post 'tags/destroy_batch.json', :body => {:ids => ids}, :params => @client.request_params
       end
     end
   end

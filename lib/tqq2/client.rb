@@ -61,9 +61,9 @@ module Tqq2
       secret = Tqq2::Config.api_secret
       @redirect_uri = Tqq2::Config.redirect_uri
 
-      options = {:site          => " https://open.t.qq.com/",
-                 :authorize_url => "/cgi-bin/authorize",
-                 :token_url     => "/cgi-bin/access_token",
+      options = {:site          => "https://open.t.qq.com/",
+                 :authorize_url => "/cgi-bin/oauth2/authorize",
+                 :token_url     => "/cgi-bin/oauth2/access_token",
                  :raise_errors  => false,
                  :ssl           => {:verify => false}}.merge(opts)
 
@@ -83,10 +83,29 @@ module Tqq2
     # @param [Hash] access token options, to pass to the AccessToken object
     # @return [AccessToken] the initalized AccessToken
     def get_token(params, access_token_opts={})
+
+      unless params.class == Hash
+        params = Hash[params.split("&").collect{|pair| pair.split("=")}]
+      end
       params = params.merge(:parse => :json)
+
       access_token_opts = access_token_opts.merge({:header_format => "OAuth2 %s", :param_name => "access_token"})
 
-      @token = super(params, access_token_opts)
+      #@token = super(params, access_token_opts)
+      opts = {:raise_errors => options[:raise_errors], :parse => params.delete(:parse)}
+      if options[:token_method] == :post
+        headers = params.delete(:headers)
+        opts[:body] = params
+        opts[:headers] =  {'Content-Type' => 'application/x-www-form-urlencoded'}
+        opts[:headers].merge!(headers) if headers
+      else
+        opts[:params] = params
+      end
+      response = request(options[:token_method], token_url, opts)
+      raise Error.new(response) if options[:raise_errors] && !(response.parsed.is_a?(Hash) && response.parsed['access_token'])
+
+      parsed = Hash[response.parsed.split("&").collect{|pair| pair.split("=")}]
+       @token = OAuth2::AccessToken.from_hash(self, parsed.merge(access_token_opts))
     end
 
     # Initializes an AccessToken from a hash
@@ -99,7 +118,7 @@ module Tqq2
               :header_format => "OAuth2 %s",
               :param_name => "access_token"}
 
-      @token = Tqq2::AccessToken.new(self, access_token, opts)
+      @token = OAuth2::AccessToken.new(self, access_token, opts)
     end
 
     # Refreshes the current Access Token
@@ -138,6 +157,12 @@ module Tqq2
     #
     # APIs
     #
+
+    def request_params
+      access_token = self.token.token
+      #request_params = {"oauth_consumer_key" => self.id, "access_token" => access_token, "openid" => params["openid"], "oauth_version" => "2.a", "scope" => "all"}
+      request_params = {"oauth_consumer_key" => self.id, "access_token" => access_token, "oauth_version" => "2.a"}
+    end
 
     def account
       @account ||= Tqq2::Interface::Account.new(self)
@@ -180,6 +205,7 @@ module Tqq2
     end
 
     def users
+
       @users ||= Tqq2::Interface::Users.new(self)
     end
   end

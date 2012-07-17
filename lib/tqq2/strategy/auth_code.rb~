@@ -1,10 +1,10 @@
-module Weibo2
+module Tqq2
   module Strategy
     # The Authorization Code Strategy
     #
     # @see http://tools.ietf.org/html/draft-ietf-oauth-v2-15#section-4.1
     class AuthCode < OAuth2::Strategy::AuthCode
-    
+
       # The authorization URL endpoint of the provider
       #
       # @param [Hash] params additional query parameters for the URL
@@ -12,7 +12,7 @@ module Weibo2
         params = {:redirect_uri => @client.redirect_uri}.merge(params)
         super params
       end
-      
+
       # Retrieve an access token given the specified validation code.
       #
       # @param [String] code The Authorization Code value

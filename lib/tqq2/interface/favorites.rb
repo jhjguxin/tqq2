@@ -15,7 +15,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/favorites
       def favorites(opts={})
-        get 'favorites.json', :params => opts
+        get 'favorites.json', :params => opts.merge(@client.request_params)
       end
 
       # 根据收藏ID获取指定的收藏信息
@@ -24,7 +24,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/favorites/show
       def show(id)
-        get 'favorites/show.json', :params => {:id => id}
+        get 'favorites/show.json', :params => {:id => id}.merge(@client.request_params)
       end
 
       # 根据标签获取当前登录用户该标签下的收藏列表
@@ -36,7 +36,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/favorites/by_tags
       def by_tags(tid, opts={})
-        get 'favorites/by_tags.json', :params => {:tid => tid}.merge(opts)
+        get 'favorites/by_tags.json', :params => {:tid => tid}.merge(opts).merge(@client.request_params)
       end
 
       # 获取当前登录用户的收藏标签列表
@@ -47,7 +47,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/favorites/tags
       def tags(opts={})
-        get 'favorites/tags.json', :params => opts
+        get 'favorites/tags.json', :params => opts.merge(@client.request_params)
       end
 
       #
@@ -61,7 +61,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/favorites/create
       def create(id)
-        post 'favorites/create.json', :body => {:id => id}
+        post 'favorites/create.json', :params => @client.request_params, :body => {:id => id}
       end
 
       # 取消收藏一条微博
@@ -70,7 +70,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/favorites/destroy
       def destroy(id)
-        post 'favorites/destroy.json', :body => {:id => id}
+        post 'favorites/destroy.json', :params => @client.request_params, :body => {:id => id}
       end
 
       # 根据收藏ID批量取消收藏
@@ -78,7 +78,7 @@ module Tqq2
       # @param [String] ids 要取消收藏的收藏ID，用半角逗号分隔，最多不超过10个
       # @see http://open.weibo.com/wiki/2/favorites/destroy_batch
       def destroy_batch(ids)
-        post 'favorites/destroy_batch.json', :body => {:ids => ids}
+        post 'favorites/destroy_batch.json', :params => @client.request_params, :body => {:ids => ids}
       end
 
       # 更新一条收藏的收藏标签
@@ -89,7 +89,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/favorites/tags/update
       def tags_update(id, opt={})
-        post 'favorites/tags/update.json', :body => {:id => id}.merge(opts)
+        post 'favorites/tags/update.json', :params => @client.request_params, :body => {:id => id}.merge(opts)
       end
 
       # 更新当前登录用户所有收藏下的指定标签
@@ -98,7 +98,7 @@ module Tqq2
       # @param [String] tag 需要更新的标签内容
       # @see http://open.weibo.com/wiki/2/favorites/tags/update_batch
       def tags_update_batch(tid, tag)
-        post 'favorites/tags/update_batch.json', :body => {:tid => tid, :tag => tag}
+        post 'favorites/tags/update_batch.json', :params => @client.request_params, :body => {:tid => tid, :tag => tag}
       end
 
       # 删除当前登录用户所有收藏下的指定标签
@@ -107,7 +107,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/favorites/tags/destroy_batch
       def tags_destroy_batch(tid)
-        post 'favorites/tags/destroy_batch.json', :body => {:tid => tid}
+        post 'favorites/tags/destroy_batch.json', :params => @client.request_params, :body => {:tid => tid}
       end
     end
   end

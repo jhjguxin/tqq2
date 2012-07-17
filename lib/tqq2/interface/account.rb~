@@ -7,6 +7,7 @@ module Tqq2
     # @see http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2#.E8.B4.A6.E5.8F.B7
     class Account < Base
 
+
       # 获取用户基本信息 [Privilege]
       #
       # @param [Hash] opts
@@ -188,7 +189,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/account/profile/edu_update
       def update_edu(year, departmentid, schoolid, level, opts={})
-        post 'api/user/update_edu', :body => {:feildid => 1, :year => year, :departmentid => departmentid :schoolid => schoolid, :level => level}.merge(opts)
+        post 'api/user/update_edu', :body => {:feildid => "1", :year => year, :departmentid => departmentid, :schoolid => schoolid, :level => level}.merge(opts)
       end
 
       # 修改和删除用户教育信息 [Privilege]
@@ -197,7 +198,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/account/profile/edu_destroy
       def edu_destroy(fieldid,opts={})
-        post 'api/user/update_edu', :body => { :feildid => fieldid, :year => '', :departmentid => '' :schoolid => '', :level => ''}.merge(opts)
+        post 'api/user/update_edu', :body => { :feildid => fieldid, :year => '', :departmentid => '', :schoolid => '', :level => ''}.merge(opts)
       end
 
       # 更新当前登录用户的职业信息 [Privilege]
@@ -213,7 +214,7 @@ module Tqq2
       # @option opts [String] :company 公司名称，不可为空值
       #
       # @see http://open.weibo.com/wiki/2/account/profile/car_update
-      def profile_car_update(opts)
+#      def profile_car_update(opts)
 #        post 'account/profile/car_update.json', :body => opts
 #      end
 
@@ -250,6 +251,6 @@ module Tqq2
 #      def update_privacy(opts={})
 #        post 'account/update_privacy.json', :body => opts
 #      end
-#    end
-#  end
-#end
+    end
+  end
+end

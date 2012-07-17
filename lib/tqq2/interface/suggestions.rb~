@@ -1,12 +1,12 @@
 # encoding: utf-8
-module Weibo2
+module Tqq2
   module Interface
-  
+
     # Suggestions API
     #
     # @see http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2#.E6.8E.A8.E8.8D.90
     class Suggestions < Base
-    
+
       # 返回系统推荐的热门用户列表
       #
       # @param [Hash] opts
@@ -16,7 +16,7 @@ module Weibo2
       def users_hot(opts={})
         get 'suggestions/users/hot.json', :params => opts
       end
-      
+
       # 获取用户可能感兴趣的人
       #
       # @param [Hash] opts
@@ -27,7 +27,7 @@ module Weibo2
       def users_may_interested(opts={})
         get 'suggestions/users/may_interested.json', :params => opts
       end
-      
+
       # 根据一段微博正文推荐相关微博用户
       #
       # @param [String] content 微博正文内容
@@ -38,7 +38,7 @@ module Weibo2
       def users_by_status(content, opts={})
         get 'suggestions/users/by_status.json', :params => {:content => content}.merge(opts)
       end
-      
+
       # 返回系统推荐的热门收藏
       #
       # @param [Hash] opts
@@ -49,12 +49,12 @@ module Weibo2
       def favorites_hot(opts={})
         get 'suggestions/favorites/hot.json', :params => opts
       end
-      
-      
+
+
       #
       # write
       #
-      
+
       # 把某人标识为不感兴趣的人
       #
       # @param [int64] uid 不感兴趣的用户的UID
@@ -63,7 +63,7 @@ module Weibo2
       def users_not_interested(uid)
         post 'suggestions/users/not_interested.json', :body => {:uid => uid}
       end
-      
+
     end
   end
 end

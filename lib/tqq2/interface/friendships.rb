@@ -17,7 +17,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/friends
       def friends(opts={})
-        get 'friendships/friends.json', :params => opts
+        get 'friendships/friends.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取两个用户之间的共同关注人列表
@@ -30,7 +30,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/friends/in_common
       def friends_in_common(uid, opts={})
-        get 'friendships/friends/in_common.json', :params => {:uid => uid}.merge(opts)
+        get 'friendships/friends/in_common.json', :params => {:uid => uid}.merge(opts).merge(@client.request_params)
       end
 
       # 获取用户的双向关注列表，即互粉列表
@@ -43,7 +43,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/friends/bilateral
       def friends_bilateral(uid, opts={})
-        get 'friendships/friends/bilateral.json', :params => {:uid => uid}.merge(opts)
+        get 'friendships/friends/bilateral.json', :params => {:uid => uid}.merge(opts).merge(@client.request_params)
       end
 
       # 获取用户双向关注的用户ID列表，即互粉UID列表
@@ -56,7 +56,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/friends/bilateral/ids
       def friends_bilateral_ids(uid, opts={})
-        get 'friendships/friends/bilateral/ids.json', :params => {:uid => uid}.merge(opts)
+        get 'friendships/friends/bilateral/ids.json', :params => {:uid => uid}.merge(opts).merge(@client.request_params)
       end
 
       # 获取用户关注的用户UID列表
@@ -69,7 +69,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/friends/ids
       def friends_ids(opts={})
-        get 'friendships/friends/ids.json', :params => opts
+        get 'friendships/friends/ids.json', :params => opts.merge(@client.request_params)
       end
 
       # 批量获取当前登录用户的关注人的备注信息 [Privilege]
@@ -78,7 +78,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/friends/remark_batch
       def friends_remark_batch(uids)
-        get 'friendships/friends/remark_batch.json', :params => {:uids => uids}
+        get 'friendships/friends/remark_batch.json', :params => {:uids => uids}.merge(@client.request_params)
       end
 
       # 获取用户的粉丝列表
@@ -91,7 +91,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/followers
       def followers(opts={})
-        get 'friendships/followers.json', :params => opts
+        get 'friendships/followers.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取用户粉丝的用户UID列表
@@ -104,7 +104,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/followers/ids
       def followers_ids(opts={})
-        get 'friendships/followers/ids.json', :params => opts
+        get 'friendships/followers/ids.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取用户的活跃粉丝列表
@@ -114,7 +114,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/followers/active
       def followers_active(uid, opts={})
-        get 'friendships/followers/active.json', :params => {:uid => uid}.merge(opts)
+        get 'friendships/followers/active.json', :params => {:uid => uid}.merge(opts).merge(@client.request_params)
       end
 
       # 获取当前登录用户的关注人中又关注了指定用户的用户列表
@@ -126,7 +126,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/friends_chain/followers
       def friends_chain_followers(uid, opts={})
-        get 'friendships/friends_chain/followers.json', :params => {:uid => uid}.merge(opts)
+        get 'friendships/friends_chain/followers.json', :params => {:uid => uid}.merge(opts).merge(@client.request_params)
       end
 
       # 获取两个用户之间的详细关注关系情况
@@ -139,7 +139,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/show
       def show(opts={})
-        get 'friendships/show.json', :params => opts
+        get 'friendships/show.json', :params => opts.merge(@client.request_params)
       end
 
       #
@@ -155,7 +155,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/create
       def create(opts={})
-        post 'friendships/create.json', :body => opts
+        post 'friendships/create.json', :body => opts, :params => @client.request_params
       end
 
       # 根据用户UID批量关注用户 [Privilege]
@@ -164,7 +164,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/create_batch
       def create_batch(uids)
-        post 'friendships/create_batch.json', :body => {:uids => uids}
+        post 'friendships/create_batch.json', :body => {:uids => uids}, :params => @client.request_params
       end
 
       # 取消关注一个用户
@@ -175,7 +175,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/destroy
       def destroy(opts={})
-        post 'friendships/destroy.json', :body => opts
+        post 'friendships/destroy.json', :body => opts, :params => @client.request_params
       end
 
       # 更新当前登录用户所关注的某个好友的备注信息 [Privilege]
@@ -185,7 +185,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/friendships/remark/update
       def remark_update(uid, remark)
-        post 'friendships/remark/update.json', :body => {:uid => uid, :remark => remark}
+        post 'friendships/remark/update.json', :body => {:uid => uid, :remark => remark}, :params => @client.request_params
       end
 
     end

@@ -12,7 +12,7 @@ module Tqq2
       # @param [String] nickname 需要验证的昵称。4-20个字符，支持中英文、数字、"_"或减号
       # @see http://open.weibo.com/wiki/2/register/verify_nickname
       def verify_nickname(nickname)
-        get 'register/verify_nickname.json', :params => {:nickname => nickname}
+        get 'register/verify_nickname.json', :params => {:nickname => nickname}.merge(@client.request_params)
       end
 
     end

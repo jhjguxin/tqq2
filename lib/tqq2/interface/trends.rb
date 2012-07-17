@@ -15,7 +15,7 @@ module Tqq2
       # @option opts [int] :page  返回结果的页码，默认为1
       # @see http://open.weibo.com/wiki/2/trends
       def trends(uid, opts={})
-        get 'trends.json', :params => {:uid => uid}.merge(opts)
+        get 'trends.json', :params => {:uid => uid}.merge(opts).merge(@client.request_params)
       end
 
       # 判断当前用户是否关注某话题
@@ -24,7 +24,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/trends/is_follow
       def is_follow(trend_name)
-        get 'trends/is_follow.json', :params => {:trend_name => trend_name}
+        get 'trends/is_follow.json', :params => {:trend_name => trend_name}.merge(@client.request_params)
       end
 
       # 返回最近一小时内的热门话题
@@ -34,7 +34,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/trends/hourly
       def hourly(opts={})
-        get 'trends/hourly.json', :params => opts
+        get 'trends/hourly.json', :params => opts.merge(@client.request_params)
       end
 
       # 返回最近一天内的热门话题
@@ -44,7 +44,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/trends/daily
       def daily(opts={})
-        get 'trends/daily.json', :params => opts
+        get 'trends/daily.json', :params => opts.merge(@client.request_params)
       end
 
       # 返回最近一周内的热门话题
@@ -54,7 +54,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/trends/weekly
       def weekly(opts={})
-        get 'trends/weekly.json', :params => opts
+        get 'trends/weekly.json', :params => opts.merge(@client.request_params)
       end
 
       #
@@ -66,7 +66,7 @@ module Tqq2
       # @param [String] trend_name 要关注的话题关键词
       # @see http://open.weibo.com/wiki/2/trends/follow
       def follow(trend_name)
-        post 'trends/follow.json', :body => {:trend_name => trend_name}
+        post 'trends/follow.json', :body => {:trend_name => trend_name}, :params => @client.request_params
       end
 
       # 8485304 no pass
@@ -76,7 +76,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/trends/destroy
       def destroy(trend_id)
-        post 'trends/destroy.json', :body => {:trend_id => trend_id}
+        post 'trends/destroy.json', :body => {:trend_id => trend_id}, :params => @client.request_params
       end
     end
   end

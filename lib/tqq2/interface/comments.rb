@@ -19,7 +19,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/comments/show
       def show(id, opts={})
-        get 'comments/show.json', :params => {:id => id}.merge(opts)
+        get 'comments/show.json', :params => {:id => id}.merge(opts).merge(@client.request_params)
       end
 
       # 获取当前登录用户所发出的评论列表
@@ -33,7 +33,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/comments/by_me
       def by_me(opts={})
-        get 'comments/by_me.json', :params => opts
+        get 'comments/by_me.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取当前登录用户所接收到的评论列表
@@ -48,7 +48,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/comments/to_me
       def to_me(opts={})
-        get 'comments/to_me.json', :params => opts
+        get 'comments/to_me.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取当前登录用户的最新评论包括接收到的与发出的
@@ -61,7 +61,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/comments/timeline
       def timeline(opts={})
-        get 'comments/timeline.json', :params => opts
+        get 'comments/timeline.json', :params => opts.merge(@client.request_params)
       end
 
       # 获取最新的提到当前登录用户的评论，即@我的评论
@@ -76,7 +76,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/comments/mentions
       def mentions(opts={})
-        get 'comments/mentions.json', :params => opts
+        get 'comments/mentions.json', :params => opts.merge(@client.request_params)
       end
 
       # 根据评论ID批量返回评论信息
@@ -85,7 +85,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/comments/show_batch
       def show_batch(cids)
-        get 'comments/show_batch.json', :params => {:cids => cids}
+        get 'comments/show_batch.json', :params => {:cids => cids}.merge(@client.request_params)
       end
 
       #
@@ -101,7 +101,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/comments/create
       def create(comment, id)
-        post 'comments/create.json', :body => {:comment => comment, :id => id}
+        post 'comments/create.json', :params => @client.request_params, :body => {:comment => comment, :id => id}
       end
 
       # no test
@@ -111,7 +111,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/comments/destroy
       def destroy(cid)
-        post 'comments/destroy.json', :body => {:cid => cid}
+        post 'comments/destroy.json', :params => @client.request_params, :body => {:cid => cid}
       end
 
       # 根据评论ID批量删除评论
@@ -120,7 +120,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/comments/destroy_batch
       def destroy_batch(cids)
-        post 'comments/destroy_batch.json', :body => {:cids => cids}
+        post 'comments/destroy_batch.json',:params => @client.request_params , :body => {:cids => cids}
       end
 
       # no test
@@ -135,7 +135,7 @@ module Tqq2
       #
       # @see http://open.weibo.com/wiki/2/comments/reply
       def reply(cid, id, comment, opts={})
-        post 'comments/reply.json', :body => {:cid => cid, :id => id, :comment => comment}.merge(opts)
+        post 'comments/reply.json',:params => @client.request_params , :body => {:cid => cid, :id => id, :comment => comment}.merge(opts)
       end
 
     end

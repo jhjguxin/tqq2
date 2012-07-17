@@ -3,6 +3,8 @@
 
 A Ruby wrapper for SA wrapper for 'open.t.qq.com' OAuth2 API.It is based on {OAuth2 gem}[https://github.com/intridea/oauth2], thanks for his hard-working.I have wrapped most of the APIs sina defined.Note that all of the privilege APIs haven't been tested yet, since I don't get the authorization to use it.
 
+**Notice: It's only work for `BBtang.com`, if you want to use it, may be you must fix many bug.**
+
 == Installation
 
   gem install Tqq2
