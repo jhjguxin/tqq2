@@ -80,7 +80,7 @@ If you are authorized, then you can do whatever you want now.
   response.parsed
   # => {"uid"=>1234567890}
 
-6. Send message
+6.Send message
 
 ```ruby
 def tqq_status_update(auth = nil, message = nil)
