@@ -82,18 +82,16 @@ If you are authorized, then you can do whatever you want now.
 
 6.Send message
 
-```ruby
-def tqq_status_update(auth = nil, message = nil)
-  if auth.present? and auth.provider.eql? "tqq"
-    client = Tqq2::Client.from_hash(access_token: auth.access_token)
-    message ||= "it's a test message ... by francis, from #{root_url}"
-    #message ||= "it's a test message ... by francis, from #{app.root_url(host: "bbtang.com")}"
-    clientip = Setting.server_ip
-    clientip ||= "xxx.xxx.xxx.xxx"
-    client.t.add(message, {clientip: Setting.server_ip, content: message, "openid" => auth.uid})
+  def tqq_status_update(auth = nil, message = nil)
+    if auth.present? and auth.provider.eql? "tqq"
+      client = Tqq2::Client.from_hash(access_token: auth.access_token)
+      message ||= "it's a test message ... by francis, from #{root_url}"
+      #message ||= "it's a test message ... by francis, from #{app.root_url(host: "bbtang.com")}"
+      clientip = Setting.server_ip
+      clientip ||= "xxx.xxx.xxx.xxx"
+      client.t.add(message, {clientip: Setting.server_ip, content: message, "openid" => auth.uid})
+    end
   end
-end
-```
 
 
 == API
