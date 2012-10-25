@@ -188,8 +188,8 @@ module Tqq2
       @search ||= Tqq2::Interface::Search.new(self)
     end
 
-    def statuses
-      @statuses ||= Tqq2::Interface::Statuses.new(self)
+    def t
+      @t ||= Tqq2::Interface::T.new(self)
     end
 
     def suggestions
